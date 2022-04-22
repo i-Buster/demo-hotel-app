@@ -1,0 +1,26 @@
+.inactive {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+
+.carouselImg {
+	width: 100%;
+}
+
+.arrows {
+    display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.leftArrow {
+	transform: rotate(180deg);
+	cursor: pointer;
+}
+
+.rightArrow {
+	cursor: pointer;
+}
