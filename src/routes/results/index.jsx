@@ -137,7 +137,7 @@ const SearchResultsPage = () => {
 				<div className={style.hotelFacilitiesContainer}>
 					<div className={style.hotelFacilitiesTitleContainer} onClick={() => handleFilterAccordian('starRatings')}>
 						<div className={style.hotelFacilitiesTitle}>Rating</div>
-						<img src={'/assets/arrow-right.png'} width={33} height={33} className={filters.hotelFacilities ? style.expanded : style.collapsed} />
+						<img src={'/assets/arrow-right.png'} width={33} height={33} className={filters.starRatings ? style.expanded : style.collapsed} />
 					</div>
 					{filters.starRatings && starRatingList.map((item) => (
 						<div key={item.key}>
@@ -153,7 +153,7 @@ const SearchResultsPage = () => {
 				<div className={style.hotelFacilitiesContainer}>
 					<div className={style.hotelFacilitiesTitleContainer} onClick={() => handleFilterAccordian('priceRange')}>
 						<div className={style.hotelFacilitiesTitle}>Price</div>
-						<img src={'/assets/arrow-right.png'} width={33} height={33} className={filters.hotelFacilities ? style.expanded : style.collapsed} />
+						<img src={'/assets/arrow-right.png'} width={33} height={33} className={filters.priceRange ? style.expanded : style.collapsed} />
 					</div>
 					{filters.priceRange && priceRangeList.map((item) => (
 						<div key={item.key}>
