@@ -12,7 +12,7 @@ const App = () => (
 		<Header />
 		<Router>
 			<Home path="/" />
-			<SearchResults path="/results/" />
+			<SearchResults path="/results/:queryLocation/" />
 		</Router>
 	</div>
 )

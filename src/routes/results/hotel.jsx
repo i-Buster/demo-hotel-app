@@ -66,7 +66,7 @@ const Hotel = ({ hotelItem }) => {
 									width="68"
 									height="22"
 								/>
-								<div className={style.paymentAmountStyles}>{`from £${hotelItem?.directDebitSchedule?.[0]?.paymentAmount}`}</div>
+								<div className={style.paymentAmountStyles}>{`from £${hotelItem?.directDebitSchedule?.[0]?.paymentAmount || 0}`}</div>
 							</div>
 						</div>
 						<div className={style.inclusions}>

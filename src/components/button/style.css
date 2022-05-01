@@ -10,3 +10,10 @@
 .buttonStyles:hover {
 background-color: #c40909;
 }
+
+.buttonStyles:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}

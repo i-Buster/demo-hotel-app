@@ -1,4 +1,3 @@
-import { mockResponse } from '../../utility/constants/mockResponse';
 import { h } from 'preact';
 import { useEffect, useState } from "preact/hooks";
 import { API_ENDPOINTS } from '../../utility/constants/api';
@@ -8,11 +7,7 @@ import CustomLoader from '../../components/customLoader';
 import { hotelFacilitiesList, priceRangeList, starRatingList } from '../../utility/constants';
 import Hotel from './hotel';
 
-const options = {
-	method: 'POST',
-}
-
-const SearchResultsPage = () => {
+const SearchResultsPage = ({ queryLocation, queryDate }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchResults, setSearchResults] = useState([]);
 	const [filteredSearchResults, setfilteredSearchResults] = useState([]);
@@ -29,31 +24,55 @@ const SearchResultsPage = () => {
 
 	useEffect(() => {
 		const filteredResult = searchResults?.filter((item) => {
-		if (checked?.length === 0 || checked?.every(facility => item?.hotel?.content?.hotelFacilities?.includes(facility))) {
-			if (selectedStars?.length === 0 || selectedStars?.some(star => item?.hotel?.content?.starRating?.includes(star)))
-			{
-				if (priceRange?.length === 0 || priceRange?.some(price => {
-					if (price === 'belowThousand') {
-						return item?.pricePerPerson < 1000
-					}
-					if (price === 'betweenOneAndTwoThousand') {
-						return item?.pricePerPerson >= 1000 && item?.pricePerPerson <= 2000
-					}
-					if (price === 'overTwoThousand') {
-						return item?.pricePerPerson > 2000
-					}
-				})) return true
-				 return false
+			if (checked?.length === 0 || checked?.every(facility => item?.hotel?.content?.hotelFacilities?.includes(facility))) {
+				if (selectedStars?.length === 0 || selectedStars?.some(star => item?.hotel?.content?.starRating?.includes(star))) {
+					if (priceRange?.length === 0 || priceRange?.some(price => {
+						if (price === 'belowThousand') {
+							return item?.pricePerPerson < 1000
+						}
+						if (price === 'betweenOneAndTwoThousand') {
+							return item?.pricePerPerson >= 1000 && item?.pricePerPerson <= 2000
+						}
+						if (price === 'overTwoThousand') {
+							return item?.pricePerPerson > 2000
+						}
+					})) return true
+					return false
+				} return false
 			} return false
-		} return false
-	})
+		})
 		setfilteredSearchResults(filteredResult)
 	}, [checked, searchResults, selectedStars, priceRange])
 
 	const callHotelsApi = async () => {
 		try {
 			setIsLoading(true);
-			const response = await fetch(API_ENDPOINTS.HOTEL_RESULTS_MOCK);
+
+			const body = {
+				bookingType: "holiday",
+				path: "holiday",
+				location: queryLocation,
+				departureDate: queryDate,
+				duration: "7",
+				gateway: "LHR",
+				direct: false,
+				partyCompositions: [
+					{
+						adults: 2,
+						childAges: [],
+						infants: 0
+					}
+				]
+			}
+			const options = {
+				method: 'POST',
+				headers: {
+					'Content-Type': "application/json;charset=utf-8",
+					'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+				},
+				body: JSON.stringify(body)
+			}
+			const response = await fetch(API_ENDPOINTS.HOTEL_RESULTS, options);
 			if (isHttpSuccess(response.status)) {
 				const data = await response.json();
 				setSearchResults(data?.holidays)
