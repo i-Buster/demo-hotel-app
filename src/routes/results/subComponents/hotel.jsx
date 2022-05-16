@@ -1,9 +1,9 @@
 import { h } from 'preact';
-import style from './style.css';
-import Note from '../../components/note';
-import Button from '../../components/button';
-import BulletedList from '../../components/bulletedList';
-import Carousel from '../../components/Carousel';
+import style from '../style.css';
+import Note from '../../../components/note';
+import Button from '../../../components/button';
+import BulletedList from '../../../components/bulletedList';
+import Carousel from '../../../components/Carousel';
 
 const Hotel = ({ hotelItem }) => {
 	const isHotelTypeVilla = hotelItem?.hotel?.content?.propertyType === 'Villa'

@@ -81,3 +81,12 @@
 .locationIcon {
 	margin-right: 5px;
 }
+
+.destinationSuggestionsTitle {
+	text-align: center;
+    padding: 10px 0;
+    background-color: white;
+    border-bottom: 1px solid grey;
+    font-weight: bold;
+    user-select: none;
+}

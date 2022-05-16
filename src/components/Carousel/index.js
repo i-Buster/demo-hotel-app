@@ -43,7 +43,7 @@ const Carousel = ({ imageList = [] }) => {
 					width="33"
 					height="33"
 				/>
-				<div>{`${activeIndex} of ${imageList?.length}`}</div>
+				<div id='currentAndTotalImages'>{`${activeIndex} of ${imageList?.length}`}</div>
 				<img
 					src="/assets/arrow-right.png"
 					onClick={nextImage}

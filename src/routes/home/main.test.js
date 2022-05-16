@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import Home from '../src/routes/home';
+import Home from '.';
 import { shallow } from 'enzyme';
 
 describe('Initial Test of the Home page', () => {

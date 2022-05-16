@@ -5,7 +5,8 @@ import style from './style.css';
 import { isHttpSuccess } from '../../utility/helper';
 import CustomLoader from '../../components/customLoader';
 import { hotelFacilitiesList, priceRangeList, starRatingList } from '../../utility/constants';
-import Hotel from './hotel';
+import Hotel from './subComponents/hotel';
+import { getHotelList } from '../../api/hotel';
 
 const SearchResultsPage = ({ queryLocation, queryDate }) => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -72,14 +73,10 @@ const SearchResultsPage = ({ queryLocation, queryDate }) => {
 				},
 				body: JSON.stringify(body)
 			}
-			const response = await fetch(API_ENDPOINTS.HOTEL_RESULTS, options);
-			if (isHttpSuccess(response.status)) {
-				const data = await response.json();
-				setSearchResults(data?.holidays)
-				setfilteredSearchResults(data?.holidays)
-			} else {
-				//Handle Error
-			}
+			const data = await getHotelList(options)
+			setSearchResults(data?.holidays)
+			setfilteredSearchResults(data?.holidays)
+
 		} catch (e) {
 			console.log('error', e?.message);
 
@@ -189,8 +186,10 @@ const SearchResultsPage = ({ queryLocation, queryDate }) => {
 				<div className={style.totalResultsTitle}>
 					{`${filteredSearchResults?.length} holiday${filteredSearchResults?.length !== 1 ? 's' : ''} found`}
 				</div>
-				{filteredSearchResults?.map(hotelItem => <Hotel hotelItem={hotelItem} key={hotelItem?.hotel?.id} />
+				<div id="listOfHotels">
+					{filteredSearchResults?.map(hotelItem => <Hotel hotelItem={hotelItem} key={hotelItem?.hotel?.id} />
 				)}
+				</div>
 			</div>
 		</div>
 	);

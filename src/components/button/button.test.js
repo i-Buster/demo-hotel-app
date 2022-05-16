@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { shallow } from 'enzyme';
-import Button from '../src/components/button';
+import Button from '.';
 
 describe('Test Button component', () => {
 	it('Test click event', () => {

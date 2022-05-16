@@ -5,6 +5,7 @@ import { useState } from "preact/hooks";
 import Button from '../../components/button';
 import { isHttpSuccess } from '../../utility/helper';
 import { API_ENDPOINTS } from '../../utility/constants/api';
+import { getDestinationSuggestions } from '../../api/hotel';
 
 const locationIcon = '/assets/location.png'
 
@@ -30,14 +31,8 @@ const Home = () => {
 	//TODO: Debounce
 	const callCityApi = async () => {
 		try {
-			const response = await fetch(`${API_ENDPOINTS.CITY_LIST}?q=${searchText}`);
-			if (isHttpSuccess(response?.status)) {
-				const data = await response.json();
-				setCityList(data?.cityList)
-			} else {
-				setCityList([])
-				alert('API failure!!')
-			}
+			const data = await getDestinationSuggestions(searchText)
+			setCityList(data?.cityList)
 		} catch (e) {
 			console.log('error', e.message);
 		} finally {
@@ -64,9 +59,12 @@ const Home = () => {
 					<div className={style.destinationContainer}>
 						<label className={style.destinationText}>Destination: </label>
 						<div className={style.searchDropdown}>
-							<input value={searchText} onInput={setText} className={style.searchBox} />
+							<input value={searchText} onInput={setText} className={style.searchBox} placeholder='Search Destination' />
 							{cityList?.length > 0 && !selectedCity ?
 								<ul className={style.listContainer}>
+									<div className={style.destinationSuggestionsTitle}>
+										Best Match
+									</div>
 									{cityList?.map((item) => (
 										<div key={item.key} className={style.searchItem} onClick={() => handleCitySelection(item)}>
 											<img src={locationIcon} width={20} height={20} className={style.locationIcon} />

@@ -36,7 +36,7 @@
   "jest": {
     "preset": "jest-preset-preact",
     "testMatch": [
-      "<rootDir>/tests/*.test.js"
+      "<rootDir>/src/**/*.test.js"
     ],
     "setupFiles": [
       "<rootDir>/tests/__mocks__/browserMocks.js",
