@@ -1,0 +1,18 @@
+.boardBasis {
+	font-weight: bold;
+}
+
+.benefitList {
+	padding-inline-start: 1rem;
+}
+
+.bulletIcon {
+	color: #e10a0a;
+	margin-bottom: 12px;
+}
+
+.bulletText {
+	color: grey;
+	font-size: 0.8rem;
+	padding-left: 8px;
+}

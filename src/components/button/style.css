@@ -1,0 +1,19 @@
+.buttonStyles {
+    color: #fff;
+    font-weight: bold;
+    background-color: #e10a0a;
+    padding: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.buttonStyles:hover {
+background-color: #c40909;
+}
+
+.buttonStyles:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
